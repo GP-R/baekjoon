@@ -1,0 +1,76 @@
+//baekjoon 10773
+//2022-05-18
+#include <iostream>
+
+using namespace std;
+
+class Stack {
+	
+	int top, MaxSize;
+	int* stack;
+public:
+	Stack(int size)
+	{
+		MaxSize = size;
+		stack = new int[MaxSize];
+		top = -1;
+	}
+
+	bool isFull() {
+		if (top == MaxSize - 1) return true;
+		else return false;
+	}
+
+	bool isEmpty() {
+		if (top == -1) return true;
+		else return false;
+	}
+
+	int pop() {
+		if (isEmpty() == true) return 0;
+		else return stack[top--];
+	}
+
+	void push(int element) {
+		if (isFull() == true) return;
+		else stack[++top] = element;
+	}
+
+
+	void print() {
+		for (int i = 0; i < top + 1; ++i)
+			cout << stack[i] << endl;
+	}
+	int sum() {
+		int result = 0;
+		for (int i = 0; i < top + 1; ++i)
+			result += stack[i];
+		return result;
+	}
+
+	int size()
+	{
+		if (isEmpty() == true)
+			return 0;
+		return top + 1;
+	}
+};
+
+
+int main(void)
+{
+	int n;
+	cin >> n;
+	Stack stack(n);
+	int num;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> num;
+		if (num != 0)
+			stack.push(num);
+		else
+			stack.pop();
+	}
+	cout << stack.sum();
+	return 0;
+}
